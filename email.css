@@ -1,0 +1,94 @@
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f1f3f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  /* Caixa principal */
+  .container {
+    background: #fff;
+    width: 400px;
+    padding: 40px 30px;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    text-align: center;
+  }
+  
+  /* Logo */
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #4285f4;
+    margin-bottom: 20px;
+  }
+  
+  /* Título */
+  h2 {
+    margin: 10px 0;
+    font-weight: normal;
+  }
+  
+  /* Texto */
+  p {
+    
+    color: #5f6368;
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+  
+  /* Campo de input */
+  input {
+    margin-bottom: 10px;
+    width: 90%;
+    padding: 12px;
+    margin-top: 10px;
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    font-size: 14px;
+    outline: none;
+  }
+  
+  input:focus {
+    border: 2px solid #4285f4;
+  }
+  
+  /* Botão */
+  .btn {
+    margin-top: 25px;
+    width: 100%;
+    padding: 12px;
+    background-color: #1a73e8;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .btn:hover {
+    background-color: #1669c1;
+  }
+  
+  /* Link */
+  .link {
+    color: #1a73e8;
+    text-decoration: none;
+    font-size: 14px;
+    display: inline-block;
+    margin-top: 15px;
+  }
+  
+  .link:hover {
+    text-decoration: underline;
+  }
+  
+  /* Rodapé */
+  .footer {
+    margin-top: 20px;
+    font-size: 12px;
+    color: #5f6368;
+  }
