@@ -1,57 +1,20 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+$arquivo = __DIR__ . "/dados/usuarios.json";
 
-// Testa se veio do POST
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    exit("Acesso inválido. Use o formulário.");
+// Cria pasta se não existir
+if (!is_dir(dirname($arquivo))) mkdir(dirname($arquivo), 0777, true);
+
+// Adiciona teste
+$usuarios = [];
+if(file_exists($arquivo)){
+    $usuarios = json_decode(file_get_contents($arquivo), true) ?? [];
 }
 
-$senha = $_POST['senha'] ?? '';
-$confirmar = $_POST['confirmar'] ?? '';
+$usuarios[] = [
+    "email" => $_POST['email'],
+    "senha" => password_hash($_POST['senha'], PASSWORD_DEFAULT)
+];
+file_put_contents($arquivo, json_encode($usuarios, JSON_PRETTY_PRINT));
 
-if ($senha !== $confirmar) {
-    exit("As senhas não coincidem!");
-}
-
-if (strlen($senha) < 6) {
-    exit("A senha deve ter pelo menos 6 caracteres.");
-}
-
-// Criptografa a senha
-$senhaHash = password_hash($senha, PASSWORD_DEFAULT);
-
-// Detecta Área de Trabalho automaticamente
-if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-    $desktop = getenv('USERPROFILE') . "/Desktop";
-} else {
-    $desktop = getenv('HOME') . "/Desktop";
-}
-
-if (!$desktop) {
-    exit("Não foi possível detectar a Área de Trabalho.");
-}
-
-$pasta = $desktop . "/meus_dados";
-
-// Cria a pasta se não existir
-if (!is_dir($pasta)) {
-    if (!mkdir($pasta, 0777, true)) {
-        exit("Falha ao criar a pasta: $pasta. Verifique permissões.");
-    } else {
-        echo "Pasta criada com sucesso: $pasta<br>";
-    }
-} else {
-    echo "Pasta já existe: $pasta<br>";
-}
-
-// Arquivo final
-$caminho = $pasta . "/dados.txt";
-
-// Tenta salvar
-if (file_put_contents($caminho, "Hash: $senhaHash\n-------------------\n", FILE_APPEND) === false) {
-    exit("Erro ao salvar o arquivo: $caminho. Verifique permissões.");
-}
-
-echo "Senha salva com sucesso em: $caminho";
+echo "JSON atualizado! Veja em: " . $arquivo;
 ?>
